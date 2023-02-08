@@ -1,23 +1,26 @@
 package progrms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //this is program of cyclic sort
-//Given an array nums containing n distinct numbers in the range [0, n]
+//Given an array nums containing n distinct numbers in the range [1, n]
 //return the only number in the range that is missing from the array.
-//https://leetcode.com/problems/missing-number/
-public class FindMissingNumber {
+//https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
+public class FindAllMissingNumber {
 
     public static void main(String[] args) {
-        int[] arr={4,0,1,2};
-        int num=missingNumber(arr);
-        System.out.println(num);
+        int[] arr={4,3,2,7,8,2,3,1};
+        System.out.println(missingNumber(arr));
     }
 
-    static int missingNumber(int[] nums){
+    static List<Integer> missingNumber(int[] nums){
+        List<Integer> list=new ArrayList<>();
         int i=0;
         while(i<nums.length){
             //starts from zero
-            int correct=nums[i];
-            if(nums[i]<nums.length && nums[i]!=nums[correct]){
+            int correct=nums[i]-1;
+            if(nums[i]!=nums[correct]){
                 swap(nums,i,correct);
             }else {
                 i++;
@@ -25,12 +28,12 @@ public class FindMissingNumber {
         }
 
         for (int index = 0; index < nums.length; index++) {
-            if(nums[index]!=index){
-                return index;
+            if(nums[index]!=index+1){
+                list.add(index+1);
             }
         }
 
-        return nums.length;
+        return list;
     }
 
     private static void swap(int[] arr, int i, int correct) {
